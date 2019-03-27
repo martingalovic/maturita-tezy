@@ -8,4 +8,22 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-5
+      %a.navbar-brand{:href => root_path} IV.EA Tezy
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item
+            %a.nav-link{:href => root_path}
+              Nahrat vypracovanie
+              %span.sr-only
+          %li.nav-item
+            %a.nav-link{:href => documents_path} Vsetky vypracovania
+
+
+    - if flash[:success].present?
+      .alert.alert-success
+        = flash[:success].html_safe
+
     = yield

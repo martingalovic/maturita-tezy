@@ -1,0 +1,19 @@
+.container
+  .jumbotron
+    %h1 Nahraj svoje vypracovanie
+    %p Grek nebud kokot a normalne zvol svoje meno, ked to nahras jak dakto iny tak sa to dojebe a uz sa to neda spatne odjebat
+
+    .row
+      .col-lg-6
+        = form_for @document, local: true, class: 'form-horizontal' do |f|
+          .form-group
+            = f.label :student, "Kto si"
+            = f.select :student, Student.pending_names, {}, class: 'form-control', required: true
+          .form-group
+            = f.label :file, "Nahraj subor (pdf)"
+            = f.file_field :file, class: 'form-control', required: true, accept: '.pdf'
+
+          .alert.alert-danger
+            Skontroluj ci si vybral spravne meno!
+          .form-group
+            = f.submit "Odovzdat", class: 'btn btn-primary'
