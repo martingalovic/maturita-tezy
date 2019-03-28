@@ -7,10 +7,13 @@ class DocumentsController < ApplicationController
   end
 
   def new
+    redirect_to documents_path, flash: { info: "jedno zadanie staci, uz nenahravaj dalsie" } if current_student&.document
     @document = Document.new
   end
 
   def create
+    redirect_to documents_path, flash: { info: "jedno zadanie staci, uz nenahravaj dalsie" } if current_student&.document
+
     @student = Student.create!(name: document_params[:student], pin: ('%05d' % rand(10 ** 5)))
     @document = Document.create!(student: @student, file: document_params[:file])
 
@@ -27,7 +30,7 @@ class DocumentsController < ApplicationController
     @document.checked = !@document.checked?
     @document.checker = current_student
     @document.save!
-    redirect_back fallback_location: documents_path, flash: { success: "Overene" }
+    redirect_to documents_path, flash: { success: "Overene" }
   end
 
   private
