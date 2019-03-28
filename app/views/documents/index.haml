@@ -1,3 +1,28 @@
 .container
   - unless student_signed_in?
     = render partial: 'sign_in'
+  - else
+    .table-responsive
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th Kto
+            %th Kedy
+            %th Overene?
+            %th.text-right Download
+        %tbody
+          - @documents.each do |document|
+            %tr{class: "#{document.student_id == current_student.id ? 'table-warning' : ''}"}
+              %td
+                = "#{document.student_id == current_student.id ? "<b>--> tvoje </b>" : ""} #{h(document.student.name)}".html_safe
+              %td= "#{document.created_at.strftime("%A")}, #{document.created_at.to_formatted_s(:short)}"
+              %td
+                - if document.checked?
+                  %span.text-success= fa_icon "check", text: "Hej vsetko poodicke"
+                  = link_to "zrusit overenie", document_check_path(document) if current_student.admin?
+                - else
+                  %span.text-danger= fa_icon "times", text: "Zatial nie"
+                  = link_to "overit", document_check_path(document) if current_student.admin?
+
+              %td.text-right
+                = link_to "Download", document_download_path(document), class: 'btn btn-sm btn-info'

@@ -8,6 +8,14 @@ module ApplicationHelper
   end
 
   def authenticate_student!
-    return redirect_to documents_path, status: :temporary_redirect, flash: { error: 'nono ty vytržnik' }
+    return redirect_to documents_path, status: :temporary_redirect, flash: { danger: 'nono ty vytržnik' } unless student_signed_in?
+  end
+
+  def student_login(student_id)
+    session[:student_id] = student_id
+  end
+
+  def student_logout
+    session.delete(:student_id)
   end
 end

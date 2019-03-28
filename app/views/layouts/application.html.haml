@@ -25,5 +25,17 @@
       - if flash[:success].present?
         .alert.alert-success
           = flash[:success].html_safe
+      - if flash[:danger].present?
+        .alert.alert-danger
+          = flash[:danger].html_safe
+      - if flash[:info].present?
+        .alert.alert-info
+          = flash[:info].html_safe
+
+      - if student_signed_in?
+        %p
+          = "Si prihlaseny ako <b>#{current_student.name}</b>, pin: <b>#{current_student.pin}</b>".html_safe
+          |
+          = link_to "Odhlasit sa", logout_path
 
     = yield

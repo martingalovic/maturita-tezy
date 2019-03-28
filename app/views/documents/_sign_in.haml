@@ -1,1 +1,12 @@
-login
+.row
+  .col-sm-6.offset-sm-3
+    .card
+      .card-body
+        .card-title
+          %h5 Prihlas sa
+        = form_with url: login_path, local: true, class: 'form-horizontal' do |f|
+          .form-group
+            = f.label :pin
+            = f.text_field :pin, size: 5, class: 'form-control', placeholder: '*****'
+          .form-group
+            = f.submit "Prihlasit sa", class: 'btn btn-block btn-primary'

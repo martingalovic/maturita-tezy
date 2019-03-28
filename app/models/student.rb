@@ -38,4 +38,13 @@ class Student < ApplicationRecord
     except = Document.all.map {|d| d.student.name}
     AVAILABLE_STUDENTS - except
   end
+
+  def verified?
+    document&.checked? || false
+  end
+
+  def admin?
+    blacklist = ["Roman Grék", "Lukáš Mišanko"]
+    blacklist.exclude?(name)
+  end
 end
