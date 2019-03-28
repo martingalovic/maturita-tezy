@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_205125) do
+ActiveRecord::Schema.define(version: 2019_03_28_145311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_205125) do
     t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "checker_id"
+    t.index ["checker_id"], name: "index_documents_on_checker_id"
     t.index ["student_id"], name: "index_documents_on_student_id"
   end
 
@@ -32,4 +34,5 @@ ActiveRecord::Schema.define(version: 2019_03_27_205125) do
   end
 
   add_foreign_key "documents", "students"
+  add_foreign_key "documents", "students", column: "checker_id"
 end

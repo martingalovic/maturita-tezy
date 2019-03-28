@@ -25,6 +25,7 @@ class DocumentsController < ApplicationController
 
   def check
     @document.checked = !@document.checked?
+    @document.checker = current_student
     @document.save!
     redirect_back fallback_location: documents_path, flash: { success: "Overene" }
   end
