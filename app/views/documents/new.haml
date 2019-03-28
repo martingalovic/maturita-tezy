@@ -11,7 +11,7 @@
             = f.select :student, Student.pending_names, {}, class: 'form-control', required: true
           .form-group
             = f.label :file, "Nahraj subor (pdf)"
-            = f.file_field :file, class: 'form-control', required: true, accept: '.pdf'
+            = f.file_field :file, class: 'form-control', required: true, accept: '.pdf,.doc,.docx'
 
           .alert.alert-danger
             Skontroluj ci si vybral spravne meno!
