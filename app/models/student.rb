@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
-  has_one :document
-  has_many :checked_documents, class_name: "Document", foreign_key: "checker_id"
+  has_one :document, dependent: :destroy
+  has_many :checked_documents, class_name: "Document", foreign_key: "checker_id", dependent: :nullify
 
   AVAILABLE_STUDENTS = [
       'Peter Bariš',
