@@ -10,7 +10,7 @@ class Document::FileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/tezy/#{model.student_id}-#{model.student.name.parameterize}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -41,7 +41,10 @@ class Document::FileUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    if original_filename
+      # @name ||= Digest::MD5.hexdigest(File.dirname(current_path))
+      "#{model.student.name.parameterize}.#{file.extension}"
+    end
+  end
 end

@@ -21,9 +21,9 @@
           %li.nav-item
             %a.nav-link{:href => documents_path} Vsetky vypracovania
 
-
-    - if flash[:success].present?
-      .alert.alert-success
-        = flash[:success].html_safe
+    .container
+      - if flash[:success].present?
+        .alert.alert-success
+          = flash[:success].html_safe
 
     = yield
