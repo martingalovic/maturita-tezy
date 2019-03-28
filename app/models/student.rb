@@ -2,6 +2,8 @@ class Student < ApplicationRecord
   has_one :document, dependent: :destroy
   has_many :checked_documents, class_name: "Document", foreign_key: "checker_id", dependent: :nullify
 
+  validates :name, uniqueness: true
+
   AVAILABLE_STUDENTS = [
       'Peter Bariš',
       'Maroš Benka',
@@ -47,5 +49,10 @@ class Student < ApplicationRecord
   def admin?
     blacklist = ["Roman Grék", "Lukáš Mišanko"]
     blacklist.exclude?(name)
+  end
+
+  def superadmin?
+    whitelist = ["Martin Galovič"]
+    whitelist.include?(name)
   end
 end

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     get '/download', action: :download
     get '/check', action: :check
   end
+
+  # users
+  resources :students, only: [:destroy]
 end

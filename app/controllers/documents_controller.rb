@@ -9,17 +9,24 @@ class DocumentsController < ApplicationController
   def new
     redirect_to documents_path, flash: { info: "jedno zadanie staci, uz nenahravaj dalsie" } if current_student&.document
     @document = Document.new
+    @student = Student.new
   end
 
   def create
     redirect_to documents_path, flash: { info: "jedno zadanie staci, uz nenahravaj dalsie" } if current_student&.document
 
-    @student = Student.create!(name: document_params[:student], pin: ('%05d' % rand(10 ** 5)))
-    @document = Document.create!(student: @student, file: document_params[:file])
+    @student = Student.new(name: document_params[:student], pin: ('%05d' % rand(10 ** 5)))
+    @document = Document.new
 
-    flash[:success] = "Odovzdane, modli sa zeby to nebola picovina, tvoj PIN: <strong>#{@student.pin}</strong>"
+    if @student.save
+      @document = Document.create!(student: @student, file: document_params[:file])
 
-    redirect_to documents_path
+      flash[:success] = "Odovzdane, modli sa zeby to nebola picovina, tvoj PIN: <strong>#{@student.pin}</strong>"
+      redirect_to documents_path
+    else
+      render :new
+    end
+
   end
 
   def download

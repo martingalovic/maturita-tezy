@@ -5,6 +5,12 @@
 
     .row
       .col-lg-6
+        - if @student.errors.any?
+          .alert.alert-danger
+            %ul
+              - @student.errors.full_messages.each do |msg|
+                %li= msg
+
         = form_for @document, local: true, class: 'form-horizontal' do |f|
           .form-group
             = f.label :student, "Kto si"

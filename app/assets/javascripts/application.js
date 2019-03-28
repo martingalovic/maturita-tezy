@@ -17,3 +17,13 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+    $(document).on('click', '[data-confirm=]', function(e) {
+        let should_continue = confirm($(this).data('confirm'));
+        if (should_continue != true) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+    })
+});
