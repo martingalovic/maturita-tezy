@@ -15,7 +15,7 @@
             %tr{class: "#{document.student_id == current_student.id ? 'table-warning' : ''}"}
               %td
                 = "#{document.student_id == current_student.id ? "<b>--> tvoje </b>" : ""} #{h(document.student.name)}".html_safe
-                = "<br>pin: <b>#{document.student.pin}</b>".html_safe
+                = "<br>pin: <b>#{document.student.pin}</b>".html_safe if current_student.superadmin?
                 = link_to "- destroy", student_path(document.student), method: :delete, data: { confirm: 'isto?' } if current_student.superadmin?
 
               %td= "#{document.created_at.strftime("%A")}, #{document.created_at.to_formatted_s(:short)}"
