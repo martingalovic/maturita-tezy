@@ -19,11 +19,21 @@
 //= require_tree .
 
 $(function() {
-    $(document).on('click', '[data-confirm=]', function(e) {
+    $(document).on('click', '[data-confirm]', function(e) {
         let should_continue = confirm($(this).data('confirm'));
         if (should_continue != true) {
             e.preventDefault()
             e.stopPropagation()
         }
     })
+
+    $(document).on('mouseover', '[data-pin]', function(e) {
+        $(this).data('original', $(this).text())
+        $(this).text($(this).data('pin'))
+    })
+
+    $(document).on('mouseout', '[data-pin]', function() {
+        $(this).text($(this).data('original'))
+    })
+
 });

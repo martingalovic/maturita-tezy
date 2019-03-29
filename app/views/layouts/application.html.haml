@@ -36,7 +36,7 @@
 
       - if student_signed_in?
         %p
-          = "Si prihlaseny ako <b>#{current_student.name}</b>, pin: <b>#{current_student.pin}</b>".html_safe
+          = "Si prihlaseny ako <b>#{current_student.name}</b>, pin: <b data-pin='#{current_student.pin}'>*****</b>".html_safe
           |
           = link_to "Odhlasit sa", logout_path
 
