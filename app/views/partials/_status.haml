@@ -1,0 +1,7 @@
+%hr
+.progress
+  .progress-bar{style: "width: #{presenter.progress_width}%"}= "#{presenter.sent_names.size} / #{presenter.all_names.size}"
+%p
+  %small.text-muted
+    = "<b>Poponahlajte totych kokotov nech to poslu:</b> #{h(presenter.pending_names.join(', '))}".html_safe
+%br

@@ -2,6 +2,7 @@
   - unless student_signed_in?
     = render partial: 'sign_in'
   - else
+    = render partial: 'partials/status', locals: { presenter: @status_presenter }
     .table-responsive
       %table.table.table-striped.table-hover
         %thead

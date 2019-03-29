@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
   before_action :authenticate_student!, only: [:download]
 
   def index
+    @status_presenter = StatusPresenter.new
     @documents = Document.all
   end
 
